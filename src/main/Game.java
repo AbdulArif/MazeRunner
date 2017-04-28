@@ -219,6 +219,9 @@ public class  Game extends Canvas implements Runnable {
       int nx = (WIDTH * SCALE / 2) - (TILESIZE * SCALE);
       int ny = (WIDTH * SCALE / 2) - (TILESIZE * SCALE);
 
+	   // To avoid a potential crach of null pointer
+      if(nx == 0 || ny == 0 || im == null) return null;
+	  
     switch (round) {
       case 1: return level = (new Level(loader.load(Maps.lvl1)));
       case 2:
