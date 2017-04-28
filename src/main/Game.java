@@ -221,7 +221,7 @@ public class  Game extends Canvas implements Runnable {
 
 	   // To avoid a potential crach of null pointer
       if(nx == 0 || ny == 0 || im == null) return null;
-	  
+try{
     switch (round) {
       case 1: return level = (new Level(loader.load(Maps.lvl1)));
       case 2:
@@ -252,7 +252,10 @@ public class  Game extends Canvas implements Runnable {
         level.loadLevel(loader.load(Maps.finish));
         player = new Player(nx, ny, im);
         return level = new Level(loader.load(Maps.finish));//dummy code
-    }
+    } 
+    }catch(Exception e){
+	throw e;
+}
   }
   
   //
