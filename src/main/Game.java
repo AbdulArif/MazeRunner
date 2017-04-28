@@ -67,12 +67,12 @@ public class  Game extends Canvas implements Runnable {
     JMenu file= new JMenu("Menu");
     file.setBounds(0,0,WIDTH,HEIGHT);
     
-    JMenuItem newGame= new JMenuItem("New Game");
+    JMenuItem newGame= new JMenuItem("New Game"); // menu item of the new game
     newGame.addActionListener(new ActionListener()
     {
     	public void actionPerformed(ActionEvent e ){
     
-    	Game ng = new Game();
+    	Game ng = new Game(); // restart the game 
     	ng.setLevel(1);
     	ng.setPreferredSize(new Dimension(ng.WIDTH * ng.SCALE, ng.HEIGHT * ng.SCALE));
 		ng.run();
@@ -81,7 +81,7 @@ public class  Game extends Canvas implements Runnable {
     	}
     });
     
-    JMenuItem restartLvl = new JMenuItem("Restart Level");
+    JMenuItem restartLvl = new JMenuItem("Restart Level"); // restart current level
     restartLvl.addActionListener(new ActionListener()// reset same lvl
     {
     	public void actionPerformed(ActionEvent e ){
@@ -93,8 +93,8 @@ public class  Game extends Canvas implements Runnable {
     	}
     });
     
-    JMenuItem exit= new JMenuItem("Exit");
-    exit.addActionListener(new ActionListener()
+    JMenuItem exit= new JMenuItem("Exit"); // exit the game using the menu item
+	  exit.addActionListener(new ActionListener()
     {
     	public void actionPerformed(ActionEvent e ){
     		//code for exit
@@ -106,22 +106,18 @@ public class  Game extends Canvas implements Runnable {
   
     bar.setBounds(0, 0,WIDTH,25);//added
     bar.add(file);
-   
-    
-    //centers game window on screen
+   //centers game window on screen
     frame.setLocationRelativeTo(null);
     //cannot resize the screen
     frame.setResizable(false);
-    game.setBounds(0,25,WIDTH, HEIGHT -25);//added
+    game.setBounds(0,25,WIDTH, HEIGHT -25);//setbound of the top frame
     //adds game to our game window
     frame.add(game);
     //allows us to see the game window
     bar.add(file);
-    
-    
-    file.add(restartLvl);
-    file.add(newGame);
-    file.add(exit);
+    file.add(restartLvl); // file.add
+    file.add(newGame);// file.add
+    file.add(exit);// file.add
     frame.add(bar);
     frame.setVisible(true);
     //starts the game
