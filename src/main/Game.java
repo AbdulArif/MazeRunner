@@ -51,6 +51,12 @@ public class  Game extends Canvas implements Runnable {
   public static void main(String[] args) {
     //Game game = new Game();
     game.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+    /*
+      * Enhancement by Mohammed Albasha
+      * Sets the focus state on the used graphic component
+      * so the user can starts moving without mouse clicking on graphic
+    */
+    game.setFocusable(true);
     //creates our game canvas
     JFrame frame = new JFrame("MAZE RUNNER");
     frame.setSize(WIDTH * SCALE, HEIGHT * SCALE);
