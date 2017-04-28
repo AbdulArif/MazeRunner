@@ -6,7 +6,8 @@ import main.Game;
 import java.awt.Graphics;
 import levels.Level;
 
-
+// eclipse trial run 
+//nvilaewvouipih3rnwvpoiqnrevu rqpw9uv	2p9urwuvp	2929uuwv 29u 92u 
 public class Player {
   //determines how player is moving
   public boolean up = false;
