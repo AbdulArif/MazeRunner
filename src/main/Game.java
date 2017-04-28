@@ -8,15 +8,23 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
 import levels.Level;
 import levels.Maps;
 import entities.Rock;
 
 
-public class Game extends Canvas implements Runnable {
+
+public class  Game extends Canvas implements Runnable {
   //game screen size
   public static final int WIDTH = 640;
   public static final int HEIGHT = 640;
@@ -37,8 +45,8 @@ public class Game extends Canvas implements Runnable {
   public Thread gameThread;
   //misc var
   private static ImageLoader loader = new ImageLoader();
-  public static Game game = new Game();
-  
+  public static  Game game = new Game();
+  // fixed final ----------------------
   
   public static void main(String[] args) {
     //Game game = new Game();
@@ -48,13 +56,67 @@ public class Game extends Canvas implements Runnable {
     frame.setSize(WIDTH * SCALE, HEIGHT * SCALE);
     //closes game properly
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    JMenuBar bar= new JMenuBar();
+    frame.setLayout(null);//set layout
+    JMenu file= new JMenu("Menu");
+    file.setBounds(0,0,WIDTH,HEIGHT);
+    
+    JMenuItem newGame= new JMenuItem("New Game");
+    newGame.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent e ){
+    
+    	Game ng = new Game();
+    	ng.setLevel(1);
+    	ng.setPreferredSize(new Dimension(ng.WIDTH * ng.SCALE, ng.HEIGHT * ng.SCALE));
+		ng.run();
+		
+		ng.main(args);
+    	}
+    });
+    
+    JMenuItem restartLvl = new JMenuItem("Restart Level");
+    restartLvl.addActionListener(new ActionListener()// reset same lvl
+    {
+    	public void actionPerformed(ActionEvent e ){
+    		
+    		game = new Game();
+    		game.setPreferredSize(new Dimension(game.WIDTH * game.SCALE, game.HEIGHT * game.SCALE));
+    		game.run();
+    		game.main(args);
+    	}
+    });
+    
+    JMenuItem exit= new JMenuItem("Exit");
+    exit.addActionListener(new ActionListener()
+    {
+    	public void actionPerformed(ActionEvent e ){
+    		//code for exit
+    		System.out.println("Closing");
+    		System.exit(0);
+    	}
+    });
+  
+  
+    bar.setBounds(0, 0,WIDTH,25);//added
+    bar.add(file);
+   
+    
     //centers game window on screen
     frame.setLocationRelativeTo(null);
     //cannot resize the screen
     frame.setResizable(false);
+    game.setBounds(0,25,WIDTH, HEIGHT -25);//added
     //adds game to our game window
     frame.add(game);
     //allows us to see the game window
+    bar.add(file);
+    
+    
+    file.add(restartLvl);
+    file.add(newGame);
+    file.add(exit);
+    frame.add(bar);
     frame.setVisible(true);
     //starts the game
     game.start();
@@ -67,6 +129,8 @@ public class Game extends Canvas implements Runnable {
     gameThread = new Thread(this);
     gameThread.start();
   }
+  
+  
   
   @Override //Runs when the game runs
   public void run() {
@@ -92,6 +156,8 @@ public class Game extends Canvas implements Runnable {
     //stops thread when game ends
     stop();
   }
+  
+
   
   //game initilization
   public void init() {
@@ -190,4 +256,6 @@ public class Game extends Canvas implements Runnable {
   public static Level getLevel() {return level;}
   public static Player getPlayer() {return player;}
   public static ImageManager getImageManager() {return im;}
+  
+  
 }
