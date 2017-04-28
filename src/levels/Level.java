@@ -32,6 +32,26 @@ public final class Level {
   //counts the number of hazards on the map *** used for indexing in the hazard array
   public static int countHazard;
   
+@Override
+public boolean equals(Object obj){
+	try{
+		if(obj == null) return true;
+		
+		final Level l = (Level) obj;
+		  if(MAXROCKS == l.MAXROCKS && MAXHAZARDS == l.MAXHAZARDS && startX == l.startX && startY == l.startY &&
+				   finishX == l.finishX && finishY == l.finishY && countRock == l.countRock && countHazard == l.countHazard && h == l.h
+				   && tiles.equals(l.tiles) && arrayRocks.equals(l.arrayRocks) && arrayHazards.equals(l.arrayHazards) && w == l.w )
+		  {
+			  return true;
+		  }
+		  else{
+			  return false;
+		  }
+	  }catch(Exception e)
+	  {
+		  throw e;
+	  }
+}
   
 //Loads the level
   public Level(BufferedImage levelImage) {
